@@ -163,6 +163,18 @@ namespace Funciones
             rtbResultado.Text += "\nDesviacion Estandar: " + de;
 
 
+
+            rtbResultado.Text += "\n\n_______________ * * * T I E M P O   E J E C U C I Ó N * * * ______________________________";
+            rtbResultado.Text += "\nMejor: " + valoresTiempo.Min() + " milisegundos";
+            rtbResultado.Text += "\nPeor: " + valoresTiempo.Max() + " milisegundos";
+            rtbResultado.Text += "\nPromedio: " + valoresTiempo.Average() + " milisegundos";
+
+            avg = valoresTiempo.Average();
+            sum = valoresTiempo.Sum(d => Math.Pow(d - avg, 2));
+            de = Math.Sqrt((sum) / (valoresTiempo.Count()));
+            rtbResultado.Text += "\nDesviacion Estandar: " + de + " milisegundos";
+
+
             rtbResultado.Text += "\n\n_______________ * * * S O L U C I O N E S * * * ______________________________";
 
             for (int i = 0; i < cantSoluciones; i++)
