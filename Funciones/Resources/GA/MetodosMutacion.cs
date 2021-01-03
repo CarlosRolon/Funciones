@@ -32,7 +32,8 @@ namespace Funciones.Resources.GA
                     if (probActual <= probabilidad)
                     {
                         // Muta el valor
-                        item.listaDeValoresDeX[i] = item.listaDeValoresDeX[i] * (float)Math.Sin(item.listaDeValoresDeX[i]);
+                        item.listaDeValoresDeX[i] = (float)(Math.Round(item.listaDeValoresDeX[i] * Math.Sin((item.listaDeValoresDeX[i] * Math.PI) / 25), 6));
+                        //item.listaDeValoresDeX[i] = item.listaDeValoresDeX[i] * (float)Math.Sin(item.listaDeValoresDeX[i]);
                     }
 
                 }
