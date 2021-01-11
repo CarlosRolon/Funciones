@@ -28,6 +28,7 @@ namespace Funciones
             cmbMetSeleccion.SelectedIndex = 0;
             cmbMetCruzamiento.SelectedIndex = 0;
             cmbMetReemplazo.SelectedIndex = 0;
+            cmbMetMutacion.SelectedIndex = 0;
         }
 
  
@@ -37,7 +38,7 @@ namespace Funciones
             AlgortimoGA.FuncionFitness funcionFitness = Funcion.Alpine;
             AlgortimoGA.FuncionSeleccion funcionSeleccion = MetodosSeleccion.Proporcional;
             AlgortimoGA.FuncionCruzamiento funcionCruzamiento = MetodosCruzamiento.CruzamientoArimetico;
-            AlgortimoGA.FuncionMutacion funcionMutacion = MetodosMutacion.MutacionEnReales;
+            AlgortimoGA.FuncionMutacion funcionMutacion = MetodosMutacion.MutacionRealesOptimo;
             AlgortimoGA.FuncionReemplazo funcionReemplazo = MetodosReemplazo.Aleatorio;
 
             List<ValoresFunciones> valoresSoluciones = new List<ValoresFunciones>();
@@ -93,6 +94,16 @@ namespace Funciones
                     break;
             }
 
+            switch ( cmbMetMutacion.SelectedIndex )
+            {
+                case 0:
+                    funcionMutacion = MetodosMutacion.MutacionRealesOptimo;
+                    break;
+                case 1:
+                    funcionMutacion = MetodosMutacion.MutacionRealesAleatorio;
+                    break;
+            }
+
             switch (cmbMetReemplazo.SelectedIndex)
             {
                 case 0:
@@ -119,7 +130,7 @@ namespace Funciones
                         
 
                         (r , f) = AlgortimoGA.AlgoritmoGeneticoEstacionario(
-                            10, (int)nupDimension.Value, (int)nupIteraciones.Value,
+                            10, (int)nupDimension.Value, (int)nupIteraciones.Value, (int)nupEvaluaciones.Value,
                             funcionFitness, funcionSeleccion, funcionCruzamiento, (double)nupProbCruzamiento.Value,
                             funcionMutacion, (double)nupProbMutacion.Value, funcionReemplazo);
 
@@ -140,7 +151,7 @@ namespace Funciones
                         timeMeasure.Start();
 
                         (r, f) = AlgortimoGA.AlgoritmoGeneticoGeneracional(
-                            10, (int)nupDimension.Value, (int)nupIteraciones.Value,
+                            10, (int)nupDimension.Value, (int)nupIteraciones.Value, (int)nupEvaluaciones.Value,
                             funcionFitness, funcionSeleccion, funcionCruzamiento, (double)nupProbCruzamiento.Value,
                             funcionMutacion, (double)nupProbMutacion.Value);
                         timeMeasure.Stop();
@@ -266,6 +277,12 @@ namespace Funciones
         {
             dataGridResultados.Rows.Clear();
             dataGridTiempo.Rows.Clear();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            dataGridResultados.Rows.RemoveAt(dataGridResultados.CurrentRow.Index);
+            dataGridTiempo.Rows.RemoveAt(dataGridResultados.CurrentRow.Index);
         }
     }
 

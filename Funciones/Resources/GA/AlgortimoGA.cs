@@ -19,7 +19,7 @@ namespace Funciones.Resources.GA
         static Random rand = new Random();
 
         public static (ValoresFunciones valores, float fitness) AlgoritmoGeneticoEstacionario(
-            int tamañoPoblacion , int dimension ,  int iteraciones ,  FuncionFitness fitness , 
+            int tamañoPoblacion , int dimension ,  int iteraciones , int maxEvaluaciones, FuncionFitness fitness , 
             FuncionSeleccion funcionSeleccion ,  FuncionCruzamiento funcionCruzamiento , double probCruzamiento ,
             FuncionMutacion funcionMutacion , double probMutacion , FuncionReemplazo funcionReemplazo)
         {
@@ -28,12 +28,14 @@ namespace Funciones.Resources.GA
             List<float> fitnessSoluciones;
             List<float> fitnessHijos;
             double probabilidad;
+            int evaluacion = 0;
 
 
             poblacion = generarPoblacionAleatoria(tamañoPoblacion, dimension);
             fitnessSoluciones = fitnessDePoblacion(poblacion, fitness);
+            evaluacion += tamañoPoblacion;
 
-            for (int i = 0; i < iteraciones; i++)
+            for (int i = 0; i < iteraciones && evaluacion < maxEvaluaciones ; i++)
             {
                 
 
@@ -51,8 +53,11 @@ namespace Funciones.Resources.GA
 
                 // Reemplazo
                 fitnessHijos = fitnessDePoblacion(hijos, fitness);
+                evaluacion += hijos.Count;
                 poblacion = funcionReemplazo(poblacion, hijos, fitnessSoluciones, fitnessHijos);
+                
                 fitnessSoluciones = fitnessDePoblacion(poblacion, fitness);
+                evaluacion += tamañoPoblacion;
             }
 
             //Ordena las soluciones por su funcion fitness
@@ -64,7 +69,7 @@ namespace Funciones.Resources.GA
         }
 
         public static (ValoresFunciones valores, float fitness) AlgoritmoGeneticoGeneracional(
-           int tamañoPoblacion, int dimension, int iteraciones, FuncionFitness fitness,
+           int tamañoPoblacion, int dimension, int iteraciones , int maxEvaluaciones, FuncionFitness fitness,
            FuncionSeleccion funcionSeleccion, FuncionCruzamiento funcionCruzamiento, double probCruzamiento,
            FuncionMutacion funcionMutacion, double probMutacion)
         {
@@ -73,12 +78,14 @@ namespace Funciones.Resources.GA
             List<ValoresFunciones> padres, hijos;
             List<float> fitnessSoluciones;
             double probabilidad;
+            int evaluacion = 0;
 
 
             poblacion = generarPoblacionAleatoria(tamañoPoblacion, dimension);
             fitnessSoluciones = fitnessDePoblacion(poblacion, fitness);
+            evaluacion += tamañoPoblacion;
 
-            for (int i = 0; i < iteraciones; i++)
+            for (int i = 0; i < iteraciones && evaluacion < maxEvaluaciones; i++)
             {
                 
                 nuevaPoblacion = new List<ValoresFunciones>();
@@ -101,6 +108,7 @@ namespace Funciones.Resources.GA
 
                 poblacion = nuevaPoblacion;
                 fitnessSoluciones = fitnessDePoblacion(poblacion, fitness);
+                evaluacion += tamañoPoblacion;
             }
 
 

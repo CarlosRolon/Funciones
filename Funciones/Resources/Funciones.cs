@@ -29,7 +29,8 @@ namespace Funciones.Resources
             suma = (float)Math.Pow((valoresFunciones.listaDeValoresDeX[0] - 1), 2);
             for (int i = 1; i < valoresFunciones.listaDeValoresDeX.Count; i++)
             {
-                suma += (float)( (i + 1) * Math.Pow(((2 * Math.Sin(valoresFunciones.listaDeValoresDeX[i])) - valoresFunciones.listaDeValoresDeX[i - 1]), 2));
+                suma += (float)( (i + 1) * Math.Pow(((2 * Math.Sin(valoresFunciones.listaDeValoresDeX[i])) 
+                    - valoresFunciones.listaDeValoresDeX[i - 1]), 2));
             }
 
             return suma;
@@ -44,7 +45,8 @@ namespace Funciones.Resources
 
             for (int i = 0; i < valoresFunciones.listaDeValoresDeX.Count; i++)
             {
-                suma += (float) Math.Abs((Math.Pow(x[i],5)) - (3 * (Math.Pow(x[i], 4))) + (4 * (Math.Pow(x[i], 3))) - (2 * (Math.Pow(x[i], 2))) - (10 * x_1) - 4);
+                suma += (float) Math.Abs((Math.Pow(x[i],5)) - (3 * (Math.Pow(x[i], 4))) + 
+                    (4 * (Math.Pow(x[i], 3))) - (2 * (Math.Pow(x[i], 2))) - (10 * x_1) - 4);
             }
 
             return suma;
@@ -52,27 +54,26 @@ namespace Funciones.Resources
 
         public static float Schwefel(ValoresFunciones valoresFunciones)
         {
-            float suma = 0;
-            
+            float suma = 0;            
             for (int i = 0; i < valoresFunciones.listaDeValoresDeX.Count; i++)
             {
                 suma += (float) Math.Pow(valoresFunciones.listaDeValoresDeX[i],10);               
             }
-
             return suma;
         }
 
         public static float Streched_V(ValoresFunciones valoresFunciones)
         {
-            float suma = 0;
-            
+            float suma = 0;            
             for (int i = 0; i < valoresFunciones.listaDeValoresDeX.Count-1; i++)
             {
-                suma += (float) (Math.Pow((Math.Pow(valoresFunciones.listaDeValoresDeX[i + 1], 2) + Math.Pow(valoresFunciones.listaDeValoresDeX[i], 2)), 0.25) 
-                        * (Math.Pow((Math.Sin(50 *(Math.Pow((Math.Pow(valoresFunciones.listaDeValoresDeX[i + 1], 2) + Math.Pow(valoresFunciones.listaDeValoresDeX[i], 2)), 0.1)) )), 2) + 0.1));
+                suma += (float) (Math.Pow((Math.Pow(valoresFunciones.listaDeValoresDeX[i + 1], 2) + 
+                    Math.Pow(valoresFunciones.listaDeValoresDeX[i], 2)), 0.25) 
+                        * (Math.Pow((Math.Sin(50 *
+                        (Math.Pow((Math.Pow(valoresFunciones.listaDeValoresDeX[i + 1], 2) + 
+                        Math.Pow(valoresFunciones.listaDeValoresDeX[i], 2)), 0.1)) )), 2) + 0.1));
                
             }
-
             return suma;
         }
 
