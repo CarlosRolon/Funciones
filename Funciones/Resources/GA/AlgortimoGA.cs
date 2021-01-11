@@ -67,7 +67,7 @@ namespace Funciones.Resources.GA
             int pos = indexOrdenadaPorFitness.ElementAt(0);
             return (poblacion[pos] , fitnessSoluciones[pos]);
         }
-
+        // Generacional
         public static (ValoresFunciones valores, float fitness) AlgoritmoGeneticoGeneracional(
            int tamañoPoblacion, int dimension, int iteraciones , int maxEvaluaciones, FuncionFitness fitness,
            FuncionSeleccion funcionSeleccion, FuncionCruzamiento funcionCruzamiento, double probCruzamiento,
